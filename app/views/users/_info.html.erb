@@ -11,19 +11,21 @@
 	</tr>
 	
 	<tr>
-	  <th>follows: <%= link_to user.followings.count, user_followings_path(user.id) %></th>
+	  <th>follows</th>
+	  <th><%= link_to user.followings.count, user_followings_path(user) %></th>
 	</tr>
 	<tr>
-    <th>followers: <%= link_to user.followers.count, user_followers_path(user.id) %></th>
+    <th>followers</th>
+    <th><%= link_to user.followers.count, user_followers_path(user) %></th>
   </tr>
 </table>
 　
 <div class='row'>
-  <% if user == current_user %>
+  <% if user != current_user %>
+  <td><%= render 'relationships/btn', user: user %></td>
+  <% else %>
   <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
     <i class="fas fa-user-cog"></i>
     <% end %>
-    <% else %>
-    <%= render 'relationships/btn', user: @user %>
   <% end %>
 </div>
